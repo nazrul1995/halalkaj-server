@@ -129,11 +129,24 @@ async function run() {
     })
 
     //Accepted Task
-    app.get("/my-accepted-tasks",verifyToken, async (req, res) => {
+    app.get("/my-accepted-tasks", verifyToken, async (req, res) => {
       const email = req.query.email;
       const result = await taskCollection.find({ userEmail: email }).toArray();
       res.send(result);
     });
+
+    // Done task
+
+    app.delete("/task-action/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = {
+        _id: new ObjectId(id),
+      };
+
+      const result = await taskCollection.deleteOne(filter);
+      res.send(result);
+    });
+
     // my posted jobs
     app.get("/my-posted-jobs", verifyToken, async (req, res) => {
       const email = req.query.email;
