@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Responsive Portfolio Website Design",
+    "postedBy": "Aminul Islam",
+    "category": "Web Development",
+    "summary": "Need a modern, responsive personal portfolio website using React and Tailwind CSS.",
+    "coverImage": "https://www.susla.edu/assets/susla/images/WebDevelopmentImage.jpeg",
+    "userEmail": "aminul.web@gmail.com"
+  },
+  {
+    "title": "Logo Design for Islamic Bookstore",
+    "postedBy": "Fatima Akter",
+    "category": "Graphics Designing",
+    "summary": "Design a minimal logo for an online Islamic bookstore with Arabic touch.",
+    "coverImage": "https://img.freepik.com/premium-vector/islamic-bookstore-logo-template-vector_580241-84.jpg",
+    "userEmail": "fatima.designs@gmail.com"
+  },
+  {
+    "title": "Social Media Marketing for Clothing Brand",
+    "postedBy": "Tanvir Hossain",
+    "category": "Digital Marketing",
+    "summary": "Looking for a freelancer to manage Facebook and Instagram ad campaigns for a modest clothing brand.",
+    "coverImage": "https://www.promotedge.com/wp-content/uploads/2024/09/social-media-tips-blog-header-no-logo.webp",
+    "userEmail": "tanvir.marketing@gmail.com"
+  },
+  {
+    "title": "WordPress E-commerce Site Setup",
+    "postedBy": "Sadia Rahman",
+    "category": "Web Development",
+    "summary": "Need to build an e-commerce website using WordPress and WooCommerce.",
+    "coverImage": "https://i0.wp.com/themes.svn.wordpress.org/ecommerce-store-elementor/1.4.5/screenshot.png?w=post-thumbnail&strip=all",
+    "userEmail": "sadia.wordpress@gmail.com"
+  },
+  {
+    "title": "YouTube Thumbnail Designer Needed",
+    "postedBy": "Rakib Hasan",
+    "category": "Graphics Designing",
+    "summary": "Create eye-catching YouTube thumbnails for Islamic educational channel.",
+    "coverImage": "https://i.ibb.co/example5.jpg",
+    "userEmail": "rakib.thumbnail@gmail.com"
+  },
+  {
+    "title": "SEO Optimization for Blog Site",
+    "postedBy": "Nurul Kabir",
+    "category": "Digital Marketing",
+    "summary": "Optimize on-page and off-page SEO for a new Islamic lifestyle blog.",
+    "coverImage": "https://i.ibb.co/example6.jpg",
+    "userEmail": "nurul.seo@gmail.com"
+  },
+  {
+    "title": "Mobile App UI Design",
+    "postedBy": "Maliha Chowdhury",
+    "category": "Graphics Designing",
+    "summary": "Need a creative UI design for a prayer reminder mobile app.",
+    "coverImage": "https://i.ibb.co/example7.jpg",
+    "userEmail": "maliha.uiux@gmail.com"
+  },
+  {
+    "title": "Content Writer for Islamic Blog",
+    "postedBy": "Shafiul Alam",
+    "category": "Content Writing",
+    "summary": "Looking for a content writer with deep knowledge in Islamic teachings and modern lifestyle.",
+    "coverImage": "https://i.ibb.co/example8.jpg",
+    "userEmail": "shafiul.writer@gmail.com"
+  },
+  {
+    "title": "React Developer for Dashboard Project",
+    "postedBy": "Mahmudul Hasan",
+    "category": "Web Development",
+    "summary": "Build a dashboard UI using React, Chart.js, and Firebase authentication.",
+    "coverImage": "https://i.ibb.co/example9.jpg",
+    "userEmail": "mahmud.reactdev@gmail.com"
+  },
+  {
+    "title": "Poster Design for Charity Event",
+    "postedBy": "Nusrat Jahan",
+    "category": "Graphics Designing",
+    "summary": "Create an A3-sized poster for a local mosque charity fundraising event.",
+    "coverImage": "https://i.ibb.co/example10.jpg",
+    "userEmail": "nusrat.graphics@gmail.com"
+  }
+]
