@@ -67,7 +67,7 @@ async function run() {
       res.send(result)
     })
 
-    app.get("/allJobs/:id", verifyToken, async (req, res) => {
+    app.get("/allJobs/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const job = await jobsCollection.findOne(query);
@@ -131,10 +131,9 @@ async function run() {
     //Accepted Task
     app.get("/my-accepted-tasks", verifyToken, async (req, res) => {
       const email = req.query.email;
-      const result = await taskCollection.find({ userEmail: email }).toArray();
+      const result = await taskCollection.find({ accepted_by: email }).toArray();
       res.send(result);
     });
-
     // Done task
 
     app.delete("/task-action/:id", async (req, res) => {
@@ -148,7 +147,7 @@ async function run() {
     });
 
     // my posted jobs
-    app.get("/my-posted-jobs", verifyToken, async (req, res) => {
+    app.get("/my-posted-jobs", async (req, res) => {
       const email = req.query.email;
       const result = await jobsCollection.find({ userEmail: email }).toArray();
       res.send(result);
