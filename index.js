@@ -67,7 +67,7 @@ async function run() {
       res.send(result)
     })
 
-    app.get("/allJobs/:id", async (req, res) => {
+    app.get("/allJobs/:id", verifyToken,async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const job = await jobsCollection.findOne(query);
@@ -134,21 +134,16 @@ async function run() {
       const result = await taskCollection.find({ accepted_by: email }).toArray();
       res.send(result);
     });
- // DELETE: Done or Cancel Task
-    app.delete("/task-action/:id", verifyToken, async (req, res) => {
+    // Done task
+
+    app.delete("/task-action/:id", async (req, res) => {
       const id = req.params.id;
-      if (!ObjectId.isValid(id)) {
-        return res.status(400).send({ message: "Invalid Task ID" });
-      }
+      const filter = {
+        _id: id,
+      };
 
-      const filter = { _id: new ObjectId(id), accepted_by: req.user.email };
       const result = await taskCollection.deleteOne(filter);
-
-      if (result.deletedCount === 0) {
-        return res.status(404).send({ message: "Task not found or unauthorized" });
-      }
-
-      res.send({ success: true, deletedCount: result.deletedCount });
+      res.send(result);
     });
 
     // my posted jobs
