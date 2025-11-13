@@ -59,12 +59,14 @@ async function run() {
     const db = client.db("halalkaj");
     const jobsCollection = db.collection("jobs");
     const taskCollection = db.collection("myTask");
+    const categoryCollection = db.collection("category");
 
 
     app.get("/allJobs", async (req, res) => {
       const result = await jobsCollection.find().toArray()
       res.send(result)
     })
+    
 
     app.get("/allJobs/:id",async (req, res) => {
       const id = req.params.id;
@@ -72,7 +74,11 @@ async function run() {
       const job = await jobsCollection.findOne(query);
       res.send(job);
     });
-
+    
+    app.get("/categories", async (req, res) => {
+      const result = await categoryCollection.find().toArray()
+      res.send(result)
+    })
 
     //latest Jobs
     app.get("/latest-Jobs", async (req, res) => {
