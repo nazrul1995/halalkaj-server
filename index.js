@@ -41,7 +41,6 @@ const verifyToken = async (req, res, next) => {
 
 
 const uri = `mongodb+srv://${process.env.DB_USER_NAME}:${process.env.DB_PASSWORD}@cluster0.f5i9hzs.mongodb.net/?appName=Cluster0`;
-//const uri = "mongodb+srv://halalkaj:ld9y8HxMxCcluW84@cluster0.f5i9hzs.mongodb.net/?appName=Cluster0";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -67,7 +66,7 @@ async function run() {
       res.send(result)
     })
 
-    app.get("/allJobs/:id", verifyToken,async (req, res) => {
+    app.get("/allJobs/:id",async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
       const job = await jobsCollection.findOne(query);
