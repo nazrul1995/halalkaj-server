@@ -134,16 +134,21 @@ async function run() {
       const result = await taskCollection.find({ accepted_by: email }).toArray();
       res.send(result);
     });
-    // Done task
-
-    app.delete("/task-action/:id", async (req, res) => {
+ // DELETE: Done or Cancel Task
+    app.delete("/task-action/:id", verifyToken, async (req, res) => {
       const id = req.params.id;
-      const filter = {
-        _id: new ObjectId(id),
-      };
+      if (!ObjectId.isValid(id)) {
+        return res.status(400).send({ message: "Invalid Task ID" });
+      }
 
+      const filter = { _id: new ObjectId(id), accepted_by: req.user.email };
       const result = await taskCollection.deleteOne(filter);
-      res.send(result);
+
+      if (result.deletedCount === 0) {
+        return res.status(404).send({ message: "Task not found or unauthorized" });
+      }
+
+      res.send({ success: true, deletedCount: result.deletedCount });
     });
 
     // my posted jobs
