@@ -2,7 +2,6 @@ const express = require('express')
 const app = express()
 const admin = require("firebase-admin");
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
-const port = 3000
 require("dotenv").config()
 const cors = require('cors');
 app.use(cors());
@@ -10,35 +9,38 @@ app.use(express.json());
 
 
 
-const serviceAccount = require("./serviceKey.json");
 
+const port = process.env.PORT || 3000
+
+// Firebase Admin Setup
+const decoded = Buffer.from(process.env.FB_SERVICE_KEY, 'base64').toString('utf-8')
+const serviceAccount = JSON.parse(decoded)
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+  credential: admin.credential.cert(serviceAccount),
+})
 
+// Middleware
+app.use(
+  cors({
+    origin: [process.env.CLIENT_DOMAIN,'http://localhost:5173/'],
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+)
+app.use(express.json())
 
+// jwt middlewares
 const verifyToken = async (req, res, next) => {
-  const authorization = req.headers.authorization;
-
-  if (!authorization) {
-    return res.status(401).send({
-      message: "unauthorized access. Token not found!",
-    });
-  }
-
-  const token = authorization.split(" ")[1];
+  const token = req?.headers?.authorization?.split('')[1]
+  if (!token) return res.status(401).send({ message: 'Unauthorized Access!' })
   try {
-    await admin.auth().verifyIdToken(token);
-
-    next();
-  } catch (error) {
-    res.status(401).send({
-      message: "unauthorized access.",
-    });
+    const decoded = await admin.auth().verifyIdToken(token)
+    req.tokenEmail = decoded.email
+    next()
+  } catch (err) {
+    return res.status(401).send({ message: 'Unauthorized Access!', err })
   }
-};
-
-
+}
 
 const uri = `mongodb+srv://${process.env.DB_USER_NAME}:${process.env.DB_PASSWORD}@cluster0.f5i9hzs.mongodb.net/?appName=Cluster0`;
 
@@ -74,7 +76,6 @@ async function run() {
       const job = await jobsCollection.findOne(query);
       res.send(job);
     });
-    
     app.get("/categories", async (req, res) => {
       const result = await categoryCollection.find().toArray()
       res.send(result)
@@ -140,16 +141,15 @@ async function run() {
       res.send(result);
     });
     // Done task
-
-    app.delete("/task-action/:id", async (req, res) => {
-      const id = req.params.id;
-      const filter = {
-        _id: id,
-      };
-
-      const result = await taskCollection.deleteOne(filter);
-      res.send(result);
+    app.delete("/task-action/:id",  async (req, res) => {
+      const { id } = req.params;
+      const result = await taskCollection.deleteOne({ _id: new ObjectId(id) });
+      res.send({
+        success: true,
+        result,
+      });
     });
+
 
     // my posted jobs
     app.get("/my-posted-jobs", async (req, res) => {
